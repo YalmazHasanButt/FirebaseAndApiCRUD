@@ -45,7 +45,39 @@ public class MainActivity extends AppCompatActivity {
         email_sign_up_btn = (Button) findViewById(R.id.email_signup_btn);
     }
 
+    private void email_login(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            firebaseUser = mAuth.getCurrentUser();
+                            updateUI(firebaseUser);
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                            Toast.makeText(MainActivity.this, "Authentication failed. "+task.getException(),
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
     private void buttonWorkings(){
+        email_login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(emailField.getText().toString().equalsIgnoreCase("") || passwordField.getText().toString().equalsIgnoreCase(""))
+                    Toast.makeText(MainActivity.this, "fill in both fields!", Toast.LENGTH_SHORT).show();
+                else
+                    email_login(emailField.getText().toString(), passwordField.getText().toString());
+            }
+        });
+
         email_sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
