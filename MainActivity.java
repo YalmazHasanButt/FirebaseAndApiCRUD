@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +21,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    protected static FirebaseAuth mAuth;
     private EditText emailField;
     private EditText passwordField;
     private Button email_login_btn;
     private Button email_sign_up_btn;
-
+    static FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             Intent crud_intent = new Intent(MainActivity.this, CRUDActivity.class);
             crud_intent.putExtra("Firebase_User", currentFirebaseUser);
             Toast.makeText(MainActivity.this, "sign in success!", Toast.LENGTH_LONG).show();
+            firebaseUser = currentFirebaseUser;
             startActivity(crud_intent);
         }
     }
