@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseUser;
 
 public class CRUDActivity extends AppCompatActivity {
 
@@ -25,9 +24,9 @@ public class CRUDActivity extends AppCompatActivity {
     }
 
     private void iniVariables(){
-        user_view = (TextView) findViewById(R.id.user_txt);
+        user_view =  findViewById(R.id.user_txt);
         user_view.setText("Welcome : "+MainActivity.firebaseUser.getEmail().toString());
-        signout_btn = (Button) findViewById(R.id.signout_btn);
+        signout_btn =  findViewById(R.id.signout_btn);
 
     }
 
